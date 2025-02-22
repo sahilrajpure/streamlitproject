@@ -1,0 +1,16 @@
+[browser]
+gatherUsageStats = false
+
+[theme]
+base="light"  # or "dark" if you prefer a dark theme
+
+[server]
+enableCORS = false
+headless = true
+
+[client]
+showSidebarNavigation = false  # Hides sidebar navigation
+
+[ui]
+hideTopBar = true  # Hides the top symbols (menu, Streamlit icon)
+hideSidebar = true  # Hides sidebar elements
