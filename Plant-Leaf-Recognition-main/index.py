@@ -11,7 +11,7 @@ import matplotlib
 matplotlib.use('Agg')
 
 # Load dataset
-data = "static/Copy of dataset testing.xlsx"
+data = "Plant-Leaf-Recognition-main/static/Copy of dataset testing.xlsx"
 df = pd.read_excel(data)
 
 # Rename columns for clarity
