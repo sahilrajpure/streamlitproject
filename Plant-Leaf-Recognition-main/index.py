@@ -122,7 +122,7 @@ st.markdown("<h1 style='text-align: center;'>🌱 Plant Recommendation & Filteri
 
 col1, col2, col3 = st.columns([1, 3, 1])
 with col2:
-    st.image("logoheade.png", use_column_width=True)
+    st.image("logoheade.png", use_container_width=True)
 
 st.subheader("🔍 Search for Similar Plants")
 plant_name_options = ["Select a plant"] + sorted(df["Name"].dropna().unique().tolist())
@@ -227,7 +227,7 @@ if st.button("Filter"):
         st.dataframe(filtered_df)
         vis_img = generate_visualizations(filtered_df)
         if vis_img:
-            st.image(vis_img, caption="Plant Data Visualizations", use_column_width=True)
+            st.image(vis_img, caption="Plant Data Visualizations", use_container_width=True)
     else:
         st.write("🚫 No plants match the selected filters.")
 
