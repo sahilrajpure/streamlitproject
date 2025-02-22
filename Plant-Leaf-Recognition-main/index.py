@@ -122,7 +122,7 @@ st.markdown("<h1 style='text-align: center;'>🌱 Plant Recommendation & Filteri
 
 col1, col2, col3 = st.columns([1, 3, 1])
 with col2:
-    st.image("logoheade.png", use_container_width=True)
+    st.image("Plant-Leaf-Recognition-main/logoheade.png", use_container_width=True)
 
 st.subheader("🔍 Search for Similar Plants")
 plant_name_options = ["Select a plant"] + sorted(df["Name"].dropna().unique().tolist())
