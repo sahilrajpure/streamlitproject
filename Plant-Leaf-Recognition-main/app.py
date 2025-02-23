@@ -3,17 +3,11 @@ import numpy as np
 import cv2
 import joblib
 import wikipedia
-import pyttsx3
 import matplotlib.pyplot as plt
 import threading
 from PIL import Image
 from skimage.feature import hog
 from skimage.color import rgb2gray
-
-# Initialize text-to-speech engine
-engine = pyttsx3.init()
-engine.setProperty("rate", 150)  # Adjust speaking speed
-
 
 # Load trained model, label encoder, and accuracy score (if available)
 model = joblib.load("leaf_model.pkl")
@@ -57,29 +51,13 @@ def convert_to_grayscale(img_array):
     return rgb2gray(img_array)
 
 
-def speak_text(text):
-    if "is_speaking" not in st.session_state:
-        st.session_state.is_speaking = False
-
-    def speak():
-        engine.say(text)
-        engine.runAndWait()
-        st.session_state.is_speaking = False  # Reset flag after speaking
-
-    if st.session_state.is_speaking:
-        engine.stop()  # Stop current speech if already playing
-        st.session_state.is_speaking = False
-    else:
-        st.session_state.is_speaking = True
-        threading.Thread(target=speak, daemon=True).start()  # Run speech in background
-
 
 def main():
     # Set page configuration
     st.set_page_config(page_title="Leaf Classifier", layout="wide")
 
     # Display the college header image
-    st.image("logoheade.png", use_column_width=True)
+    st.image("logoheade.png", use_container_width=True)
 
     # Apply custom nature-themed CSS styling
     st.markdown(
@@ -178,11 +156,11 @@ def main():
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            st.image(img, caption="📸 Original Image", use_column_width=True)
+            st.image(img, caption="📸 Original Image", use_container_width=True)
         with col2:
-            st.image(img_gray, caption="⚫ Grayscale Image", use_column_width=True, clamp=True)
+            st.image(img_gray, caption="⚫ Grayscale Image", use_container_width=True, clamp=True)
         with col3:
-            st.image(img_masked, caption="🖼️ Masked Image", use_column_width=True)
+            st.image(img_masked, caption="🖼️ Masked Image", use_container_width=True)
 
         st.write("🔍 **Extracting features and classifying...**")
 
@@ -215,11 +193,6 @@ def main():
         plant_info = get_plant_info(species_name)
         st.markdown(f"📝 **{species_name}**: {plant_info}", unsafe_allow_html=True)
 
-         # Read Aloud Button
-        if st.button("🔊 Read Aloud"):
-            speech_text = f"The identified species is {species_name}. The confidence level is {confidence_score:.2f} percent. {plant_info}"
-            speak_text(speech_text)
-
 
         # Visualization Section
         st.subheader("📊 Feature & HOG Analysis")
@@ -246,7 +219,6 @@ def main():
         ---
         🔬 **Built with Python, OpenCV, Scikit-Image, and Streamlit**  
         💡 **Developed by Sahil Rajpure for Plant Enthusiasts & Researchers**  
-        📢 **Supports Voice Output for Accessibility**  
     """)
 
 if __name__ == '__main__':
